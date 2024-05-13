@@ -6,8 +6,9 @@ using UnityEngine;
 public class PlayerMovemoment : MonoBehaviour
 {
     Vector2 pos;
-    Vector2 pos2;
+    
     public int speed;
+    bool groundi= false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,21 @@ public class PlayerMovemoment : MonoBehaviour
     void Update()
     {
         pos = transform.position;
-        pos.y += Input.GetAxis("Jump") * speed * Time.deltaTime;
         pos.x += Input.GetAxis("Horizontal") * speed * Time.deltaTime;
-        pos.y = Mathf.Clamp(pos.y, -5f, 2.5f);
+        pos.y += Input.GetAxis("Jump") * speed * Time.deltaTime;
+       // pos.y = Mathf.Clamp(pos.y, -5f, 2.5f);
         transform.position = pos;
 
 
     }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Debug.Log("TOUCH");
+            groundi = true;
 
+        }
+    }
+    
 }
