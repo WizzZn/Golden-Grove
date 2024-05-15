@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 
@@ -19,7 +20,6 @@ public class PlayerMovemoment : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        pos = transform.position;
     }
 
     // Update is called once per frame
@@ -27,9 +27,7 @@ public class PlayerMovemoment : MonoBehaviour
     {
         
         Movement();
-      /*  float Horizon = Input.GetAxis("Horizontal") * horizonSpeed * Time.deltaTime;
-        pos = new Vector2(Horizon, pos.y);
-        transform.position = pos;*/
+      
 
     }
     void Movement()
@@ -38,13 +36,17 @@ public class PlayerMovemoment : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isgrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+           
         }
-        if (Input.GetButtonDown("Horizontal"))
+       /* else
         {
-            rb.velocity = new Vector2(horizonSpeed, rb.velocity.y);
-        }
+            isgrounded = false;
+        }*/
 
-       
+        pos = transform.position;
+        float Horizon = Input.GetAxis("Horizontal") * horizonSpeed *Time.deltaTime;
+        pos.x += Horizon;
+        transform.position = pos;
 
     }
 
