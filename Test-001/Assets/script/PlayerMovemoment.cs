@@ -6,16 +6,21 @@ using UnityEngine;
 
 public class PlayerMovemoment : MonoBehaviour
 {
+    Rigidbody2D rb;
+    Vector2 pos;
+    public int clikCounter;
+    bool doubleJump;
+    float horizon;
+    
+
     //[SerializeField] int speed;
     [SerializeField] bool isgrounded;
     [SerializeField] int jumpPower;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
     [SerializeField] int horizonSpeed;
-   
-    
-    Rigidbody2D rb;
-    Vector2 pos;
+    [SerializeField] int speed;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,28 +31,38 @@ public class PlayerMovemoment : MonoBehaviour
     void Update()
     {
         
-        Movement();
-      
+        Jump();
+        horizon = Input.GetAxis("Horizontal");
 
     }
-    void Movement()
+    void Jump()
     {
         isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.7f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-        if (Input.GetButtonDown("Jump") && isgrounded)
+        if (isgrounded && !Input.GetButton("Jump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+            doubleJump = false;
+        }
+        if (Input.GetButtonDown("Jump"))
+        {
+           if (isgrounded || doubleJump)
+           {
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+
+                doubleJump = !doubleJump;
+           }
            
         }
-       /* else
+        if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
-            isgrounded = false;
-        }*/
+            rb.velocity = new Vector2(rb.velocity.x,rb.velocity.y * 0.5f);
+        }
 
-        pos = transform.position;
-        float Horizon = Input.GetAxis("Horizontal") * horizonSpeed *Time.deltaTime;
-        pos.x += Horizon;
-        transform.position = pos;
-
+        
+        
     }
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);
+    } 
 
 }
