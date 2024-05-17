@@ -63,6 +63,7 @@ public class PlayerMovemoment : MonoBehaviour
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);
+
     } 
 
 }
