@@ -1105,6 +1105,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clikCounter: 0
+  doubleJump: 0
   isgrounded: 1
   jumpPower: 5
   groundCheck: {fileID: 1098029427}
@@ -1113,6 +1114,7 @@ MonoBehaviour:
     m_Bits: 64
   horizonSpeed: 8
   speed: 200
+  player: {fileID: 872506691}
 --- !u!50 &872506690
 Rigidbody2D:
   serializedVersion: 4
@@ -1829,6 +1831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clikCounter: 0
+  doubleJump: 0
   isgrounded: 0
   jumpPower: 5
   groundCheck: {fileID: 1098029427}
@@ -1837,6 +1840,7 @@ MonoBehaviour:
     m_Bits: 64
   horizonSpeed: 8
   speed: 200
+  player: {fileID: 0}
 --- !u!212 &1682401579
 SpriteRenderer:
   m_ObjectHideFlags: 0

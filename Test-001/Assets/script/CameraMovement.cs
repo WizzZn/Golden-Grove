@@ -18,20 +18,14 @@ public class CameraMovement : MonoBehaviour
     void Update()
     {
        
-        if (cameraPoss.transform.position.x < 5f || cameraPoss.transform.position.y < 2f)
-        {
-            transform.position = (new Vector3(cameraPoss.transform.position.x, cameraPoss.transform.position.y, -10));
-
-        }
-        else
-        {
-          
-        }
-
-
     }
     void Awake()
     {
+
+    }
+    private void FixedUpdate()
+    {
+            transform.position = (new Vector3(cameraPoss.transform.position.x, cameraPoss.transform.position.y, -10));
 
     }
 }

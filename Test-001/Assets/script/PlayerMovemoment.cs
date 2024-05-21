@@ -20,6 +20,7 @@ public class PlayerMovemoment : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
     [SerializeField] int horizonSpeed;
     [SerializeField] int speed;
+    [SerializeField] Animator player;
 
     // Start is called before the first frame update
     void Start()
@@ -48,9 +49,37 @@ public class PlayerMovemoment : MonoBehaviour
            {
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
-                doubleJump = !doubleJump;
+               // doubleJump = !doubleJump;
+                if (Input.GetButtonDown("Jump"))
+                {
+                    player.SetBool("Jump", true);
+                    player.SetBool("idle", false);
+                    player.SetBool("DoubleJump", false);
+
+                }
+                else if (doubleJump)
+                {
+                    player.SetBool("DoubleJump", true);
+                    player.SetBool("Jump", false);
+                    player.SetBool("idle", false);
+
+                }
+                else
+                {
+                   if (isgrounded)
+                   {
+                        player.SetBool("Jump", false);
+                        player.SetBool("idle", true);
+                        player.SetBool("DoubleJump", false);
+
+
+                   }
+
+
+                }
+
            }
-           
+
         }
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
         {
@@ -62,8 +91,26 @@ public class PlayerMovemoment : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);
-
+        Movement();
     } 
+    void Movement()
+    {
+        rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);
+        if (horizon > 0f)
+        {
+           GetComponent<SpriteRenderer>().flipX = false;
+            player.SetBool("Run_R",true);
+        }
+        else if(horizon < 0f)
+        {
+            GetComponent<SpriteRenderer>().flipX = true;
+            player.SetBool("Run_R", true);
+        }
+        else
+        {
+            player.SetBool("idle", true);
+            player.SetBool("Run_R",false);
 
+        }
+    }
 }
