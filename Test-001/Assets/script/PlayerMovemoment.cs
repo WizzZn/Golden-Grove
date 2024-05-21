@@ -9,7 +9,7 @@ public class PlayerMovemoment : MonoBehaviour
     Rigidbody2D rb;
     Vector2 pos;
     public int clikCounter;
-    bool doubleJump;
+    public bool doubleJump;
     float horizon;
     
 
