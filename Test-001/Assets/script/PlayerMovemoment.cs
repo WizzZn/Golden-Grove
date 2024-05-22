@@ -36,49 +36,54 @@ public class PlayerMovemoment : MonoBehaviour
         horizon = Input.GetAxis("Horizontal");
 
     }
+    private void Awake()
+    {
+         doubleJump = false;
+    }
     void Jump()
     {
         isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.7f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-        if (isgrounded && !Input.GetButton("Jump"))
-        {
-            doubleJump = false;
-        }
+        
         if (Input.GetButtonDown("Jump"))
         {
-           if (isgrounded || doubleJump)
+           if (isgrounded)
            {
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
-               // doubleJump = !doubleJump;
-                if (Input.GetButtonDown("Jump"))
+                if (Input.GetButtonDown("Jump") && isgrounded)
                 {
                     player.SetBool("Jump", true);
                     player.SetBool("idle", false);
-                    player.SetBool("DoubleJump", false);
-
-                }
-                else if (doubleJump)
-                {
-                    player.SetBool("DoubleJump", true);
-                    player.SetBool("Jump", false);
-                    player.SetBool("idle", false);
+                    Debug.Log("Jump okk");
 
                 }
                 else
                 {
-                   if (isgrounded)
-                   {
-                        player.SetBool("Jump", false);
-                        player.SetBool("idle", true);
-                        player.SetBool("DoubleJump", false);
-
-
-                   }
-
+                    player.SetBool("Jump", false);
+                    Debug.Log("else single");
 
                 }
+              
+                doubleJump = true;
 
            }
+           else
+           {
+                if (Input.GetButtonDown("Jump") && doubleJump)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, jumpPower);
+                    doubleJump = false;
+
+                    player.SetBool("DoubleJump", true);
+                    player.SetBool("Jump", false);
+
+                }
+                else
+                {
+                    player.SetBool("Jump", false);
+                    player.SetBool("DoubleJump", false);
+                }
+            }
 
         }
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
