@@ -69,9 +69,11 @@ public class PlayerMovemoment : MonoBehaviour
                     Debug.Log("DoubleJump okk");
 
                 }
-                else if (isgrounded==true)
+                else 
                 {
-                  
+                    player.SetBool("Jump", false);
+                    player.SetBool("DoubleJump", false);
+                    Debug.Log("Double else");
                 }
            }
             else
