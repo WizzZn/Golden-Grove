@@ -50,24 +50,14 @@ public class PlayerMovemoment : MonoBehaviour
            {
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
-                if (Input.GetButtonDown("Jump") && isgrounded)
-                {
-                    player.SetBool("Jump", true);
-                    player.SetBool("idle", false);
-                    Debug.Log("Jump okk");
-
-                }
-                else
-                {
-                    player.SetBool("Jump", false);
-                    Debug.Log("else single");
-
-                }
+                player.SetBool("Jump", true);
+                Debug.Log("Jump okk");
+               
               
                 doubleJump = true;
 
            }
-           else
+           else if (doubleJump)
            {
                 if (Input.GetButtonDown("Jump") && doubleJump)
                 {
@@ -76,13 +66,20 @@ public class PlayerMovemoment : MonoBehaviour
 
                     player.SetBool("DoubleJump", true);
                     player.SetBool("Jump", false);
+                    Debug.Log("DoubleJump okk");
 
                 }
-                else
+                else if (isgrounded==true)
                 {
-                    player.SetBool("Jump", false);
-                    player.SetBool("DoubleJump", false);
+                  
                 }
+           }
+            else
+            {
+                player.SetBool("Jump", false);
+                player.SetBool("DoubleJump", false);
+                Debug.Log("Double else");
+
             }
 
         }
