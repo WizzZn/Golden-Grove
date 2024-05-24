@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    [SerializeField] LayerMask water;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +21,17 @@ public class Trap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Trap")
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        
+        }
+        else if (collision.gameObject.tag == "Coin")
+        {
+            Destroy(collision.gameObject);
+        }
+        else if (collision.gameObject.tag == "Water")
+        {
+            gameObject.SetActive(false);
         }
     }
+   
 }

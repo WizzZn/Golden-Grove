@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Trap
+  - Coin
+  - Water
   layers:
   - Default
   - TransparentFX

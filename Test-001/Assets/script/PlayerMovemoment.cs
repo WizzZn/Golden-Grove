@@ -34,15 +34,21 @@ public class PlayerMovemoment : MonoBehaviour
         
         Jump();
         horizon = Input.GetAxis("Horizontal");
-
+        if (rb.velocity.y < 0)
+        {
+            player.SetBool("Jump", false);
+            player.SetBool("DoubleJump", false);
+        }
+        
     }
     private void Awake()
     {
          doubleJump = false;
     }
+    
     void Jump()
     {
-        isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.7f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.07f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
         
         if (Input.GetButtonDown("Jump"))
         {
@@ -51,7 +57,6 @@ public class PlayerMovemoment : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
                 player.SetBool("Jump", true);
-                Debug.Log("Jump okk");
                
               
                 doubleJump = true;
@@ -66,23 +71,9 @@ public class PlayerMovemoment : MonoBehaviour
 
                     player.SetBool("DoubleJump", true);
                     player.SetBool("Jump", false);
-                    Debug.Log("DoubleJump okk");
 
-                }
-                else 
-                {
-                    player.SetBool("Jump", false);
-                    player.SetBool("DoubleJump", false);
-                    Debug.Log("Double else");
                 }
            }
-            else
-            {
-                player.SetBool("Jump", false);
-                player.SetBool("DoubleJump", false);
-                Debug.Log("Double else");
-
-            }
 
         }
         if (Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
@@ -90,12 +81,12 @@ public class PlayerMovemoment : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.x,rb.velocity.y * 0.5f);
         }
 
-        
-        
     }
+    
     private void FixedUpdate()
     {
         Movement();
+        
     } 
     void Movement()
     {
@@ -103,18 +94,19 @@ public class PlayerMovemoment : MonoBehaviour
         if (horizon > 0f)
         {
            GetComponent<SpriteRenderer>().flipX = false;
-            player.SetBool("Run_R",true);
+            player.SetBool("Run",true);
         }
         else if(horizon < 0f)
         {
             GetComponent<SpriteRenderer>().flipX = true;
-            player.SetBool("Run_R", true);
+            player.SetBool("Run", true);
         }
         else
         {
             player.SetBool("idle", true);
-            player.SetBool("Run_R",false);
+            player.SetBool("Run",false);
 
         }
     }
+    
 }

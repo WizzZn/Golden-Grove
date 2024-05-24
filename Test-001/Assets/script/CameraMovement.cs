@@ -28,4 +28,5 @@ public class CameraMovement : MonoBehaviour
             transform.position = (new Vector3(cameraPoss.transform.position.x, cameraPoss.transform.position.y, -10));
 
     }
+    
 }
