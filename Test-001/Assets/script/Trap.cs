@@ -5,6 +5,7 @@ using UnityEngine;
 public class Trap : MonoBehaviour
 {
     [SerializeField] LayerMask water;
+    [SerializeField] Animator player;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,14 +25,37 @@ public class Trap : MonoBehaviour
             gameObject.SetActive(false);
         
         }
-        else if (collision.gameObject.tag == "Coin")
+        if (collision.gameObject.tag == "Coin")
         {
             Destroy(collision.gameObject);
         }
-        else if (collision.gameObject.tag == "Water")
+        if (collision.gameObject.tag == "Water")
         {
             gameObject.SetActive(false);
         }
+        if (collision.gameObject.tag == "Enemy")
+        {
+            player.SetBool("Hit", true);
+            Debug.Log("Hit");
+
+        }
+        
     }
-   
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            player.SetBool("Hit", false);
+            Debug.Log("Hitachi");
+        }
+    }
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            player.SetBool("Hit", true);
+            Debug.Log("Hit stay");
+
+        }
+    }
 }
