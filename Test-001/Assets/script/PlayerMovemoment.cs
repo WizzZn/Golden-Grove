@@ -45,7 +45,12 @@ public class PlayerMovemoment : MonoBehaviour
     {
          doubleJump = false;
     }
-    
+    private void FixedUpdate()
+    {
+        Movement();
+
+    }
+
     void Jump()
     {
         isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.07f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
@@ -83,11 +88,7 @@ public class PlayerMovemoment : MonoBehaviour
 
     }
     
-    private void FixedUpdate()
-    {
-        Movement();
-        
-    } 
+   
     void Movement()
     {
         rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);

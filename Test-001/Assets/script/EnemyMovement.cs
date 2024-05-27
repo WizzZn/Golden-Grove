@@ -54,17 +54,15 @@ public class EnemyMovement : MonoBehaviour
     }
     void enemyFlip()
     {
-        enemyPoss = new Vector2(enemy.transform.position.x,transform.position.y);
-        if (enemyPoss.x > transform.position.x)
-        {
-            Debug.Log("right");
-            GetComponent<SpriteRenderer>().flipX = false;
-        }
-        if (enemyPoss.x < transform.position.x)
-        {
-            Debug.Log("left");
+       
+       if (player.transform.position.x > enemy.transform.position.x)
+       {
             GetComponent<SpriteRenderer>().flipX = true;
-        }
-        transform.position =  new Vector2(transform.position.x,enemyPoss.y);
+       }
+       if (player.transform.position.x < enemy.transform.position.x)
+       {
+            GetComponent<SpriteRenderer>().flipX = false;
+       }
+     
     }
 }
