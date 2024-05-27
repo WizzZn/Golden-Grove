@@ -32,7 +32,7 @@ public class EnemyMovement : MonoBehaviour
         enemyFlip();
 
     }
-    void enemyMove()
+    public void enemyMove()
     {
        
         enemyDistance = Vector2.Distance(transform.position, player.transform.position);

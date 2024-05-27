@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class ButtenClick : MonoBehaviour
 {
     [SerializeField] GameObject PausePannel;
+    [SerializeField] EnemyMovement emScript;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,6 +22,7 @@ public class ButtenClick : MonoBehaviour
     {
         PausePannel.SetActive(true);
         Time.timeScale = 0;
+       // emScript.enemyMove()
     }
     public void Countinue()
     {
@@ -46,6 +48,15 @@ public class ButtenClick : MonoBehaviour
     }
     public void Quit()
     {
-        
+       
     }
+    public void Option()
+    {
+
+    }
+    public void About()
+    {
+
+    }
+
 }
