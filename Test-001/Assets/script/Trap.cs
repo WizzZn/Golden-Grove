@@ -7,9 +7,10 @@ public class Trap : MonoBehaviour
 {
     public int key = 0;
     public int coin = 0;
-   
 
-    [SerializeField] LayerMask water;
+
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip keySound;
     [SerializeField] Animator player;
     [SerializeField] Animator chest;
     [SerializeField] Animator cup;
@@ -40,7 +41,6 @@ public class Trap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Trap")
         {
-            gameObject.SetActive(false);
             health -= 1;
         
         }
@@ -62,6 +62,7 @@ public class Trap : MonoBehaviour
             key += 1;
             keyTM.text = key.ToString();
             Destroy(collision.gameObject);
+            audioSource.PlayOneShot(keySound);
         }
         if (key == 1)
         {
