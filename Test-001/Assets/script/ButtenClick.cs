@@ -9,13 +9,14 @@ public class ButtenClick : MonoBehaviour
 
     [SerializeField] GameObject pausePannel;
     [SerializeField] GameObject gameFinishPannel;
-    [SerializeField] AudioSource audiSource;
     [SerializeField] GameObject aboutPannel;
     [SerializeField] GameObject enemyTv;
     [SerializeField] GameObject enemyCactus;
     [SerializeField] GameObject enemyDino;
-
-
+    [SerializeField] AudioListener audiListener;
+    [SerializeField] AudioSource audiSource;
+    [SerializeField] AudioClip statSfx;
+    [SerializeField] AudioClip aboutSfx;
     // Start is called before the first frame update
     void Start()
     {
@@ -58,29 +59,31 @@ public class ButtenClick : MonoBehaviour
     }
     public void play()
     {
+        audiSource.playOnAwake = true;
         SceneManager.LoadSceneAsync(1);
         Time.timeScale = 1;
-
     }
     public void Quit()
     {
-       
+        Application.Quit();
     }
-    public void Option()
-    {
-
-    }
+   
     public void About()
     {
-
+        aboutPannel.SetActive(true);
+        audiSource.PlayOneShot(aboutSfx);
+    }
+    public void ClossAbout()
+    {
+        aboutPannel.SetActive(false);
     }
     public void Mute()
     {
-        audiSource.enabled = false;
+        audiListener.enabled = false;
     }
     public void UnMute()
     {
-        audiSource.enabled = true;
+        audiListener.enabled = true;
     }
 
 }

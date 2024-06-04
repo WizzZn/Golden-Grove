@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
 {
-    
-    
-    [SerializeField] GameObject cameraPoss;
-
+    public Transform playerPoss;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,16 +14,6 @@ public class CameraMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+        transform.position = new Vector3(playerPoss.position.x, playerPoss.position.y, -15f);
     }
-    void Awake()
-    {
-
-    }
-    private void FixedUpdate()
-    {
-            transform.position = (new Vector3(cameraPoss.transform.position.x, cameraPoss.transform.position.y, -10));
-
-    }
-    
 }

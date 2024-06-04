@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1166339185582553764
 Transform:
   m_ObjectHideFlags: 0
@@ -168,7 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnim: {fileID: 9008618186812994096}
   player: {fileID: 0}
-  enemySpeed: 0.025
+  enemySpeed: 0.02
   enemyDistance: 0
   enemyPoss: {x: 0, y: 0}
   enemy: {fileID: 5457329843914768663}

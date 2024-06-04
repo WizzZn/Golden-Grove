@@ -18,9 +18,12 @@ public class PlayerMovemoment : MonoBehaviour
     [SerializeField] int jumpPower;
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundLayer;
-    [SerializeField] int horizonSpeed;
+   // [SerializeField] int horizonSpeed;
     [SerializeField] int speed;
     [SerializeField] Animator player;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip jump1Sfx;
+    [SerializeField] AudioClip jump2Sfx;
 
     // Start is called before the first frame update
     void Start()
@@ -53,8 +56,9 @@ public class PlayerMovemoment : MonoBehaviour
 
     void Jump()
     {
-        isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.07f, 0.3f), CapsuleDirection2D.Horizontal, 0, groundLayer);
-        
+        //isgrounded = Physics2D.OverlapCapsule(groundCheck.position, new Vector2(0.07f, 0.7f), CapsuleDirection2D.Horizontal, 0, groundLayer);
+        isgrounded = Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
+       
         if (Input.GetButtonDown("Jump"))
         {
            if (isgrounded)
@@ -62,7 +66,7 @@ public class PlayerMovemoment : MonoBehaviour
                 rb.velocity = new Vector2(rb.velocity.x, jumpPower);
 
                 player.SetBool("Jump", true);
-               
+                audioSource.PlayOneShot(jump1Sfx);
               
                 doubleJump = true;
 
@@ -76,7 +80,7 @@ public class PlayerMovemoment : MonoBehaviour
 
                     player.SetBool("DoubleJump", true);
                     player.SetBool("Jump", false);
-
+                    audioSource.PlayOneShot(jump2Sfx);
                 }
            }
 
@@ -91,7 +95,8 @@ public class PlayerMovemoment : MonoBehaviour
    
     void Movement()
     {
-        rb.velocity = new Vector2(horizon * speed * Time.deltaTime, rb.velocity.y);
+        rb.velocity = new Vector2(horizon * speed * Time.deltaTime , rb.velocity.y);
+       // rb.AddForce(ForceMode.Force)
         if (horizon > 0f)
         {
            GetComponent<SpriteRenderer>().flipX = false;

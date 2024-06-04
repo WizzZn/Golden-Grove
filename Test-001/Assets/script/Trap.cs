@@ -9,8 +9,7 @@ public class Trap : MonoBehaviour
     public int coin = 0;
 
 
-    [SerializeField] AudioSource audioSource;
-    [SerializeField] AudioClip keySound;
+   
     [SerializeField] Animator player;
     [SerializeField] Animator chest;
     [SerializeField] Animator cup;
@@ -23,7 +22,19 @@ public class Trap : MonoBehaviour
     [SerializeField] GameObject gameFinishPannel;
     [SerializeField] GameObject[] healthArray;
     [SerializeField] int health;
-
+    [SerializeField] bool checkPointed;
+    [SerializeField] Transform checkPoint;
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip keySfx;
+    [SerializeField] AudioClip coinSfx;
+    [SerializeField] AudioClip hitSfx;
+    [SerializeField] AudioClip respawnSfx;
+    [SerializeField] AudioClip worldComSfx;
+    [SerializeField] AudioClip waterOverSfx;
+    [SerializeField] AudioClip finishSfx;
+    [SerializeField] AudioClip trapSfx;
+    [SerializeField] AudioClip enemyKillSfx;
+    [SerializeField] AudioClip enemyKillSfx2;
 
     // Start is called before the first frame update
     void Start()
@@ -42,18 +53,20 @@ public class Trap : MonoBehaviour
         if (collision.gameObject.tag == "Trap")
         {
             health -= 1;
-        
+            audioSource.PlayOneShot(trapSfx);
         }
         if (collision.gameObject.tag == "Water")
         {
             gameObject.SetActive(false);
             gameOverPannel.SetActive(true);
+            audioSource.PlayOneShot(waterOverSfx);
         }
         if (collision.gameObject.tag == "Enemy")
         {
             player.SetBool("Hit", true);
             Debug.Log("Hit");
             health -= 1;
+            audioSource.PlayOneShot(hitSfx);
         }
 
         if (collision.gameObject.tag == "Key")
@@ -62,7 +75,7 @@ public class Trap : MonoBehaviour
             key += 1;
             keyTM.text = key.ToString();
             Destroy(collision.gameObject);
-            audioSource.PlayOneShot(keySound);
+            audioSource.PlayOneShot(keySfx);
         }
         if (key == 1)
         {
@@ -71,6 +84,8 @@ public class Trap : MonoBehaviour
                 chest.SetBool("Open", true);
                 Debug.Log("chest open");
                 coin += 10;
+                audioSource.PlayOneShot(keySfx);
+
             }
         }
         if (collision.gameObject.tag == "Cup")
@@ -94,24 +109,26 @@ public class Trap : MonoBehaviour
         {
             finish.SetBool("Flaping", true);
             enemy.SetBool("Hit", true);
-            Invoke("Finish", 2f);
+            Invoke("Finish", 5f);
+            audioSource.PlayOneShot(finishSfx);
         }
         if (collision.gameObject.tag == "Respawn")
         {
             respawn.SetBool("Flaping", true);
-
+            checkPointed = true;
         }
         if (collision.gameObject.tag == "Coin")
         {
             coin += 1;
             coinTM.text = coin.ToString();
             Destroy(collision.gameObject);
-
+            audioSource.PlayOneShot(coinSfx);
         }
     }
     void Finish()
     {
         gameFinishPannel.SetActive(true);
+        audioSource.PlayOneShot(worldComSfx);
     }
     void Healthv()
     {
@@ -195,11 +212,28 @@ public class Trap : MonoBehaviour
         if (health == 0)
         {
             Time.timeScale = 0;
-          gameOverPannel.SetActive(true);
+            audioSource.PlayOneShot(enemyKillSfx);
+            Invoke("EnemyKill", 2f);
+           // gameOverPannel.SetActive(true);
 
         }
 
     }
-  
+    public void Respawn()
+    {
+        if (checkPointed)
+        {
+            transform.position = checkPoint.position;
+            gameObject.SetActive(true);
+            health = 6;
+            gameOverPannel.SetActive(false);
+            audioSource.PlayOneShot(respawnSfx);
+        }
+    }
+    private void EnemyKill()
+    {
+        gameOverPannel.SetActive(true);
+        audioSource.PlayOneShot(enemyKillSfx2);
+    }
 
 }

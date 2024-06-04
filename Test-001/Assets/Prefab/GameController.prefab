@@ -44,4 +44,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6f2798ff4c0deb41800b235a4c80b77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PausePannel: {fileID: 0}
+  gameOverPannel: {fileID: 0}
+  pausePannel: {fileID: 0}
+  gameFinishPannel: {fileID: 0}
+  aboutPannel: {fileID: 0}
+  enemyTv: {fileID: 5096439723545139795, guid: 4886bf2df52d95f4bb61a8e652dbcaa9, type: 3}
+  enemyCactus: {fileID: 6021651201094499726, guid: 00d803c07cf3dee4a910f0b68278fd4c, type: 3}
+  enemyDino: {fileID: 5457329843914768663, guid: ca4585e729e5c4543aa7ad3233d8d4bd, type: 3}
+  audiListener: {fileID: 0}
+  audiSource: {fileID: 0}
+  statSfx: {fileID: 8300000, guid: 3151f19c464a31c4894ededa58dde36c, type: 3}
