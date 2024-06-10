@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerMovemoment : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class PlayerMovemoment : MonoBehaviour
     public int clikCounter;
     public bool doubleJump;
     float horizon;
-    
+    public Button jumpBt;
 
     //[SerializeField] int speed;
     [SerializeField] bool isgrounded;
@@ -24,11 +25,12 @@ public class PlayerMovemoment : MonoBehaviour
     [SerializeField] AudioSource audioSource;
     [SerializeField] AudioClip jump1Sfx;
     [SerializeField] AudioClip jump2Sfx;
-
+   
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        jumpBt.onClick.AddListener(JumpBtPressed);
     }
 
     // Update is called once per frame
@@ -69,7 +71,7 @@ public class PlayerMovemoment : MonoBehaviour
                 audioSource.PlayOneShot(jump1Sfx);
               
                 doubleJump = true;
-
+                //JumpBtPressed();
            }
            else if (doubleJump)
            {
@@ -114,5 +116,9 @@ public class PlayerMovemoment : MonoBehaviour
 
         }
     }
-    
+    void JumpBtPressed()
+    {
+        Debug.Log("auate Ate");
+       
+    }
 }
