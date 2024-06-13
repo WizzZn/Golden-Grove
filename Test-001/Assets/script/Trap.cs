@@ -128,7 +128,9 @@ public class Trap : MonoBehaviour
     void Finish()
     {
         gameFinishPannel.SetActive(true);
-        audioSource.PlayOneShot(worldComSfx);
+        audioSource.clip = worldComSfx;
+        audioSource.Play();
+        
     }
     void Healthv()
     {

@@ -11,8 +11,10 @@ public class PlayerMovemoment : MonoBehaviour
     Vector2 pos;
     public int clikCounter;
     public bool doubleJump;
-    float horizon;
-    public Button jumpBt;
+    public float horizon;
+    // public Button jumpBt;
+    public int btCount;
+    
 
     //[SerializeField] int speed;
     [SerializeField] bool isgrounded;
@@ -30,7 +32,7 @@ public class PlayerMovemoment : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        jumpBt.onClick.AddListener(JumpBtPressed);
+       // jumpBt.onClick.AddListener(JumpBtPressed);
     }
 
     // Update is called once per frame
@@ -39,6 +41,7 @@ public class PlayerMovemoment : MonoBehaviour
         
         Jump();
         horizon = Input.GetAxis("Horizontal");
+       
         if (rb.velocity.y < 0)
         {
             player.SetBool("Jump", false);
@@ -116,9 +119,50 @@ public class PlayerMovemoment : MonoBehaviour
 
         }
     }
-    void JumpBtPressed()
+    public  void JumpBtPressed()
     {
-        Debug.Log("auate Ate");
-       
+        if (isgrounded)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, jumpPower * 1f);
+
+            player.SetBool("Jump", true);
+            audioSource.PlayOneShot(jump1Sfx);
+
+            doubleJump = true;
+            //JumpBtPressed();
+            btCount++;
+        }
+        else if (doubleJump)
+        {
+            if (btCount == 1 && doubleJump)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpPower * 1f);
+                doubleJump = false;
+
+                player.SetBool("DoubleJump", true);
+                player.SetBool("Jump", false);
+                audioSource.PlayOneShot(jump2Sfx);
+                btCount = 0;
+
+            }
+        }
+
+        if (btCount > 1)
+        {
+            btCount = 0;
+        }
+
+         
+    }
+    public void LsftBtPressed()
+    {
+        horizon = -1f;
+        Debug.Log("Left");
+    }
+    public void RightBtPresed()
+    {
+        horizon = 1f;
+        Debug.Log("Right");
+
     }
 }
