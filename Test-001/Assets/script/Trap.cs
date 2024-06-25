@@ -110,7 +110,7 @@ public class Trap : MonoBehaviour
             finish.SetBool("Flaping", true);
             enemy.SetBool("Hit", true);
             Invoke("Finish", 5f);
-            audioSource.PlayOneShot(finishSfx);
+            
         }
         if (collision.gameObject.tag == "Respawn")
         {

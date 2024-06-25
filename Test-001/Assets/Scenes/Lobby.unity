@@ -342,6 +342,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 4598765533619803896, guid: 5ca22e1818764734899f4e7e7ad9c3b3, type: 3}
+      propertyPath: statSfx
+      value: 
+      objectReference: {fileID: 8300000, guid: 9016d4e9ac14e554ca79846d28276272, type: 3}
+    - target: {fileID: 4598765533619803896, guid: 5ca22e1818764734899f4e7e7ad9c3b3, type: 3}
       propertyPath: aboutSfx
       value: 
       objectReference: {fileID: 8300000, guid: ab071d9f0381cd5458deaf0b096cac80, type: 3}

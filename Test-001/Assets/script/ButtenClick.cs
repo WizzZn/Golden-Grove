@@ -71,11 +71,14 @@ public class ButtenClick : MonoBehaviour
     public void About()
     {
         aboutPannel.SetActive(true);
-        audiSource.PlayOneShot(aboutSfx);
+        audiSource.clip = aboutSfx;
+        audiSource.Play();
     }
     public void ClossAbout()
     {
         aboutPannel.SetActive(false);
+        audiSource.clip = statSfx;
+        audiSource.Play();
     }
     public void Mute()
     {

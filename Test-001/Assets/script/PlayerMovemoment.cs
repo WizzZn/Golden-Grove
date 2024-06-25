@@ -8,18 +8,18 @@ using UnityEngine.UI;
 public class PlayerMovemoment : MonoBehaviour
 {
     Rigidbody2D rb;
-    Vector2 pos;
     public int clikCounter;
     public bool doubleJump;
     public float horizon;
     // public Button jumpBt;
     public int btCount;
-    
 
-    //[SerializeField] int speed;
+    [SerializeField] float btSpeed;
     [SerializeField] bool isgrounded;
     [SerializeField] int jumpPower;
     [SerializeField] Transform groundCheck;
+    //[SerializeField] Transform poss;
+    [SerializeField] Vector2 pos;
     [SerializeField] LayerMask groundLayer;
    // [SerializeField] int horizonSpeed;
     [SerializeField] int speed;
@@ -56,7 +56,6 @@ public class PlayerMovemoment : MonoBehaviour
     private void FixedUpdate()
     {
         Movement();
-
     }
 
     void Jump()
@@ -129,7 +128,6 @@ public class PlayerMovemoment : MonoBehaviour
             audioSource.PlayOneShot(jump1Sfx);
 
             doubleJump = true;
-            //JumpBtPressed();
             btCount++;
         }
         else if (doubleJump)
@@ -154,14 +152,17 @@ public class PlayerMovemoment : MonoBehaviour
 
          
     }
-    public void LsftBtPressed()
+    public void LeftBtPressed()
     {
-        horizon = -1f;
+        pos = transform.position;
+        pos.x -= btSpeed;
+        transform.position = pos;
         Debug.Log("Left");
     }
     public void RightBtPresed()
     {
-        horizon = 1f;
+
+
         Debug.Log("Right");
 
     }
