@@ -6703,8 +6703,8 @@ MonoBehaviour:
   speed: 200
   player: {fileID: 872506691}
   audioSource: {fileID: 1218671102}
-  jump1Sfx: {fileID: 8300000, guid: fb7868adc2fd76f408d5034db216116a, type: 3}
-  jump2Sfx: {fileID: 8300000, guid: 58a2fd313407ad1439aeee4b73b34532, type: 3}
+  jump1Sfx: {fileID: 8300000, guid: 5fc5f3c9c2e801c4bb1d7e90188ceed2, type: 3}
+  jump2Sfx: {fileID: 8300000, guid: 5fc5f3c9c2e801c4bb1d7e90188ceed2, type: 3}
 --- !u!50 &872506690
 Rigidbody2D:
   serializedVersion: 4
